@@ -3,6 +3,8 @@
 Your best productivity tool companion.
 (_Ihr bester Produktivitäts-Tool-Begleiter_).
 
+Inspired by Trello.
+
 App Demo Website please visit [https://productiv.ridoatmanto.com/](https://productiv.ridoatmanto.com/).
 
 ## Stack Build
