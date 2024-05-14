@@ -5,6 +5,8 @@ Your best productivity tool companion.
 
 Inspired by Trello.
 
+![Preview Productiv App](screenshot.png)
+
 App Demo Website please visit [https://productiv.ridoatmanto.com/](https://productiv.ridoatmanto.com/).
 
 ## Stack Build
