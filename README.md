@@ -15,6 +15,7 @@ App Demo Website please visit [https://productiv.ridoatmanto.com/](https://produ
 - React
 - TypeScript
 - Tailwind CSS
+- Bun
 - Vercel
 - CloudFlare.
 
