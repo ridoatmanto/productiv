@@ -5,7 +5,7 @@ export default function Productiv() {
     <div className="h-screen w-screen lg:max-w-4xl">
       <h1 className="text-3xl font-bold ml-4 lg:ml-2 tracking-wider">
         <a
-          className="text-[#213547] hover:underline"
+          className="text-[#213547] dark:text-white hover:underline"
           href="https://productiv.ridoatmanto.com"
         >
           <img
@@ -44,7 +44,7 @@ export default function Productiv() {
           isDone={true}
         />
       </div>
-      <footer className="text-slate-500 text-xs text-center border-t-2 border-dashed py-2 mt-2 lg:mt-8">
+      <footer className="text-slate-500 text-xs text-center border-t-2 border-slate-100 dark:border-slate-500 border-dashed py-2 mt-2 lg:mt-8">
         Copyright &copy; 2024 <a href="https://ridoatmanto.com">Rido Atmanto</a>
       </footer>
     </div>

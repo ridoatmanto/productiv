@@ -14,11 +14,7 @@ export function Card({
   const strikeThrough = isDone === true ? "line-through" : "";
   return (
     <div className={"w-full rounded-lg mb-4 lg:mb-0 border-2 " + borderColor}>
-      <div
-        className={
-          "border-b-2 pt-2 pb-1 px-2 text-center text-white " + background
-        }
-      >
+      <div className={"pt-2 pb-1 px-2 text-center text-white " + background}>
         <h2 className="text-lg tracking-wider">{title}</h2>
       </div>
       <div className="py-2 px-2 text-slate-500 dark:text-slate-400">
@@ -42,7 +38,7 @@ export function Card({
             </li>
           ))}
         </ul>
-        <div className=" w-full text-xs float-right mt-4 pb-2 mb-2 border-b-2 border-dashed">
+        <div className=" w-full text-xs float-right mt-4 pb-2 mb-2 border-b-1 border-dashed border-slate-100 dark:border-slate-500 ">
           <form method="post" id="move-form">
             <span className="float-right">
               Move selected to{" "}
@@ -53,7 +49,7 @@ export function Card({
               </select>
               <button
                 type="submit"
-                className="border-1 border-slate-500 bg-slate-300 hover:bg-slate-400 text-white"
+                className="border-1 border-slate-400 bg-slate-500 hover:bg-slate-400 text-white"
               >
                 Move
               </button>
@@ -71,7 +67,7 @@ export function Card({
           ></input>{" "}
           <button
             type="submit"
-            className="border-1 border-slate-500 bg-slate-300 hover:bg-slate-400 rounded-full px-2 py-0"
+            className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-full px-2 py-0"
           >
             +
           </button>
