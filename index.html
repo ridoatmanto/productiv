@@ -2,17 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/productiv.svg" />
+    <link rel="icon" type="image/svg+xml" href="./productiv.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Productiv | Into your best productivity</title>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
   <body class="bg-slate-100 dark:bg-slate-800 flex justify-center">
-    <div
-      id="root"
-      class="bg-slate-50 dark:bg-slate-700 my-4 px-4 py-4 rounded-lg"
-    >
-      <!-- manipulation here -->
+    <div class="w-screen h-screen lg:max-w-6xl lg:mt-6">
+      <header>
+        <h1 class="text-3xl font-bold ml-4 lg:ml-2 tracking-wider">
+          <a
+            class="text-[#213547] dark:text-white hover:underline"
+            href="https://productiv.ridoatmanto.com"
+          >
+            <img
+              class="logo inline -mt-2 mr-2"
+              src="./productiv.svg"
+              alt="Productive Logo"
+              width="36"
+              height="36"
+            />
+            Productiv
+          </a>
+        </h1>
+        <p class="text-md italic mb-4 ml-4 lg:ml-2 text-slate-500">
+          Your best productivity companion.
+        </p>
+      </header>
+      <div id="root" class="px-2 lg:px-0 pt-4 pb-2 rounded-lg">
+        <!-- manipulation here -->
+      </div>
+      <footer class="text-slate-500 text-xs text-center pb-4 lg:mt-6">
+        Copyright &copy; 2024 <a href="https://ridoatmanto.com">Rido Atmanto</a>
+      </footer>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
