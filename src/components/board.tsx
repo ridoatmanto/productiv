@@ -1,12 +1,11 @@
 import { TitleCase } from "../utils/title-case";
 
 export function Board({ list }: { list: any }) {
-  console.log(list);
   return (
     <div className="w-full rounded-lg mb-4 lg:mb-0">
       <h2
         className={
-          "mb-2 text-slate-500 dark:text-slate-100 text-lg tracking-wider "
+          "ml-2 mb-2 text-slate-500 dark:text-slate-100 text-lg tracking-wider "
         }
       >
         Your Boards
@@ -16,9 +15,9 @@ export function Board({ list }: { list: any }) {
           {list.map((item: any, i: any) => (
             <li
               className={"text-sm " + ((i + 1) % 5 === 0 ? "mb-2" : "")}
-              key={item.split(" ")[0] + "-" + i}
+              key={item.board.split(" ")[0] + "-" + i}
             >
-              <a href="#">{TitleCase(item)}</a> X edit
+              <a href="#">{TitleCase(item.board)}</a> X edit
             </li>
           ))}
         </ol>

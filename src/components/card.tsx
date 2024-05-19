@@ -12,9 +12,6 @@ export function Card({
   isDone: boolean;
 }) {
   const strikeThrough = isDone === true ? "line-through" : "";
-  console.log(borderColor);
-  console.log(background);
-  console.log(list);
   return (
     <div
       className={`w-full rounded-lg lg:mb-0 border-2 ${borderColor} bg-slate-50 dark:bg-slate-700`}
@@ -29,24 +26,28 @@ export function Card({
       </h2>
       <div className="text-slate-500 px-2 dark:text-slate-400 border-b-1 border-dashed border-slate-100 dark:border-slate-50">
         <ul className="mb-2">
-          {list.map((item: any, i: any) => (
-            <li
-              className={"text-sm " + strikeThrough}
-              key={item.split(" ")[0] + "-" + i}
-            >
-              <input
-                type="checkbox"
-                id={"check-" + item.replace(/\s+/g, "-").toLowerCase()}
-                name={item.replace(/\s+/g, "-").toLowerCase()}
-              ></input>{" "}
-              <label
-                htmlFor={"check-" + item.replace(/\s+/g, "-").toLowerCase()}
-              >
-                {" "}
-                {item}
-              </label>
-            </li>
-          ))}
+          {Object.keys(list).map((key) => {
+            const item = list[key];
+            return (
+              <li className={"text-sm " + strikeThrough} key={list[key].id}>
+                <input
+                  type="checkbox"
+                  id={
+                    "check-" + list[key].task.replace(/\s+/g, "-").toLowerCase()
+                  }
+                  name={list[key].task.replace(/\s+/g, "-").toLowerCase()}
+                ></input>{" "}
+                <label
+                  htmlFor={
+                    "check-" + item.task.replace(/\s+/g, "-").toLowerCase()
+                  }
+                >
+                  {" "}
+                  {item.task}
+                </label>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div
