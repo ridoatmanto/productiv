@@ -1,4 +1,5 @@
 import { TitleCase } from "../utils/title-case";
+import { ListForm } from "../ui/list-form";
 
 export function Board({ list }: { list: any }) {
   return (
@@ -23,7 +24,7 @@ export function Board({ list }: { list: any }) {
         </ol>
       </div>
       <div className="py-2 px-2">
-        <form method="post" id="add-list-form">
+        {/* <form method="post" id="add-list-form">
           <input
             type="text"
             name="new-list"
@@ -36,7 +37,8 @@ export function Board({ list }: { list: any }) {
           >
             +
           </button>
-        </form>
+        </form> */}
+        <ListForm isEdit={false} value="" />
       </div>
     </div>
   );

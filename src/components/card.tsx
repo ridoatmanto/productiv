@@ -1,3 +1,5 @@
+import { ListForm } from "../ui/list-form";
+
 export function Card({
   background,
   borderColor,
@@ -73,20 +75,7 @@ export function Card({
         </form>
       </div>
       <div className="py-2 px-2">
-        <form method="post" id="add-list-form">
-          <input
-            type="text"
-            name="new-list"
-            className="w-10/12 bg-slate-100 dark:bg-slate-500 dark:text-slate-300 border-2 border-solid border-slate-300 dark:border-slate-500 text-sm py-1 pl-2"
-            placeholder="New list..."
-          ></input>{" "}
-          <button
-            type="submit"
-            className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-full px-2 pt-0 pb-1 text-white"
-          >
-            +
-          </button>
-        </form>
+        <ListForm isEdit={true} value="current list" />
       </div>
     </div>
   );
