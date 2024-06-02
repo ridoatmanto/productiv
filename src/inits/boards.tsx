@@ -2,7 +2,7 @@ export type Board = {
   id: number;
   board: string;
 };
-export const boards: Board[] = [
+export const initBoardList: Board[] = [
   {
     id: 1,
     board: "Personal Development",

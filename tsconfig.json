@@ -22,6 +22,6 @@
 
     "baseUrl": "."
   },
-  "include": ["src", "src/components/card.tsx"],
+  "include": ["src", "src/components/card.tsx", "src/components/slider.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

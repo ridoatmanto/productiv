@@ -1,4 +1,4 @@
-export const tasks = [
+export const initTaskList = [
   {
     id: 1,
     board_id: 1,

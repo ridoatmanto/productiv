@@ -1,5 +1,5 @@
 import { TitleCase } from "../utils/title-case";
-import { ListForm } from "../ui/list-form";
+// import { ListForm } from "../ui/list-form";
 
 export function Board({ list }: { list: any }) {
   return (
@@ -18,28 +18,29 @@ export function Board({ list }: { list: any }) {
               className={"text-sm " + ((i + 1) % 5 === 0 ? "mb-2" : "")}
               key={item.board.split(" ")[0] + "-" + i}
             >
-              <a href="#">{TitleCase(item.board)}</a> X edit
+              <a href="#" className="inline-block pb-2">
+                {TitleCase(item.board)}
+              </a>{" "}
+              <svg
+                className="w-4 h-4 hover:w-6 hover:h-6 text-slate-500 dark:text-slate-400 inline-block"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
             </li>
           ))}
         </ol>
       </div>
-      <div className="py-2 px-2">
-        {/* <form method="post" id="add-list-form">
-          <input
-            type="text"
-            name="new-list"
-            className="w-10/12 bg-slate-100 dark:bg-slate-500 dark:text-slate-300 border-2 border-solid border-slate-300 dark:border-slate-500 text-sm py-1 pl-2"
-            placeholder="New Board..."
-          ></input>{" "}
-          <button
-            type="submit"
-            className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-full px-2 pt-0 pb-1 text-white"
-          >
-            +
-          </button>
-        </form> */}
-        <ListForm isEdit={false} value="" />
-      </div>
+      <div className="px-2">{/* <ListForm isEdit={false} value="" /> */}</div>
     </div>
   );
 }
