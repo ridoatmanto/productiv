@@ -1,22 +1,23 @@
 import { useState } from "react";
 
+import { SortByDate } from "../utils/sort-by-date";
+import { RandomId } from "../utils/random-id";
+
 export function Card({
-  background,
-  borderColor,
+  color,
   title,
-  list,
-  card,
+  tasks,
+  status,
   listCallback,
 }: {
-  background: string;
-  borderColor: string;
+  color: string;
   title: string;
-  list: any;
-  card: any;
+  tasks: any;
+  status: any;
   listCallback: any;
 }) {
-  const filteredList = list.filter((task: any) => {
-    return task.board_id === 1 && task.status === card;
+  const filteredList = tasks.filter((task: any) => {
+    return task.status === status;
   });
 
   const [isToggleAdd, setToggleAdd] = useState(false);
@@ -37,38 +38,49 @@ export function Card({
     const submittedTask = task;
 
     const newTaskList = {
-      id: list.length + 1,
-      board_id: 1,
+      id: RandomId(),
       task: submittedTask,
-      status: card,
+      status: status,
+      created_at: new Date(),
     };
-    listCallback([...list, newTaskList]);
+    listCallback([...tasks, newTaskList]);
+    saveTasks([...tasks, newTaskList]);
     setTask("");
   };
 
   const removeTask = (id: any) => {
-    const updatedTodos = list.filter((todo: any) => todo.id !== id);
-    listCallback(updatedTodos);
+    const updatedTasks = tasks.filter((task: any) => task.id !== id);
+    listCallback(updatedTasks);
+    saveTasks(updatedTasks);
   };
+
   const [movedList, setMovedList] = useState<number[]>([]);
 
   const addIntoMovedList = (id: number) => {
+    if (movedList.length == 0) {
+      setMovedList([id]);
+      return;
+    }
+
     if (movedList.includes(id)) {
-      const updatedMovedList = movedList.filter((todo: any) => todo.id !== id);
+      const updatedMovedList = movedList.filter((taskId: any) => taskId !== id);
       setMovedList(updatedMovedList);
     } else {
       setMovedList([...movedList, id]);
     }
   };
+
   const moveTask = (event: any) => {
     event.preventDefault();
-    const newList = list.map((todo: any) => {
-      if (movedList.includes(todo.id)) {
-        todo.status = targetCard;
+    const newList = tasks.map((task: any) => {
+      if (movedList.includes(task.id)) {
+        task.status = targetCard;
+        task.created_at = new Date();
       }
-      return todo;
+      return task;
     });
     listCallback(newList);
+    saveTasks(newList);
     setTargetCard("");
     setMovedList([]);
   };
@@ -79,35 +91,41 @@ export function Card({
     setTargetCard(event.target.value);
   };
 
+  const storageKey = "tasks";
+
+  const saveTasks = (tasks: any) => {
+    localStorage.setItem(storageKey, JSON.stringify(tasks));
+  };
+
   return (
     <div
-      className={`w-full rounded-lg lg:mb-0 border-2 ${borderColor} bg-slate-50 dark:bg-slate-700`}
+      className={
+        "w-full rounded-lg lg:mb-0 border-2 bg-slate-50 dark:bg-slate-700 border-" +
+        color
+      }
     >
       <h2
         className={
-          "py-1 mb-2 text-white text-lg text-center tracking-wider " +
-          background
+          "py-1 mb-2 text-white text-lg text-center tracking-wider bg-" + color
         }
       >
         {title}
       </h2>
       <div className="text-slate-500 px-2 dark:text-slate-400 border-b-1 border-dashed border-slate-100 dark:border-slate-50">
-        <ul className="mb-2">
-          {filteredList.map((todo: any) => (
-            <li className="text-sm" key={todo.id}>
+        <ul>
+          {SortByDate(filteredList).map((task: any) => (
+            <li className="text-sm" key={task.id}>
               <input
                 type="checkbox"
-                id={"check-" + todo.task.replace(/\s+/g, "-").toLowerCase()}
-                name={todo.task.replace(/\s+/g, "-").toLowerCase()}
+                id={"check-" + task.id}
+                name={task.id}
               ></input>{" "}
               <label
-                onClick={() => addIntoMovedList(todo.id)}
-                htmlFor={
-                  "check-" + todo.task.replace(/\s+/g, "-").toLowerCase()
-                }
+                onClick={() => addIntoMovedList(task.id)}
+                htmlFor={"check-" + task.id}
               >
                 {" "}
-                <span className="pb-2 inline-block">{todo.task}</span>{" "}
+                <span className="pb-2 inline-block">{task.task}</span>{" "}
               </label>
               <svg
                 className="w-4 h-4 hover:w-6 hover:h-6 text-slate-500 dark:text-slate-400 inline-block"
@@ -117,7 +135,7 @@ export function Card({
                 height="24"
                 fill="currentColor"
                 viewBox="0 0 24 24"
-                onClick={() => removeTask(todo.id)}
+                onClick={() => removeTask(task.id)}
               >
                 <path
                   fill-rule="evenodd"
@@ -129,43 +147,49 @@ export function Card({
           ))}
         </ul>
       </div>
-      <div
-        className={"text-xs pb-2 pr-2 border-b-2 border-dotted " + borderColor}
-      >
-        <form onSubmit={moveTask} method="post" id="move-form">
-          <div className="text-right">
-            <span className="inline dark:text-slate-400">
-              Move selected to{" "}
-            </span>
-            <select
-              value={targetCard}
-              onChange={handleTargetCardChange}
-              className="pl-2 py-1 mr-2 inline dark:text-slate-400 text-xs"
-            >
-              <option value="" defaultValue="">
-                Choose
-              </option>
-              <option value="todo">Todo</option>
-              <option value="progress">In Progress</option>
-              <option value="done">Done</option>
-            </select>
-            <button
-              type="submit"
-              className="inline bg-slate-500 hover:bg-slate-400 text-slate-100 py-1 px-2"
-            >
-              Move
-            </button>
-          </div>
-        </form>
-      </div>
+      {movedList.length > 0 && (
+        <div
+          className={
+            "text-xs pb-2 pr-2 mt-2 border-b-2 border-dotted border-" + color
+          }
+        >
+          <form onSubmit={moveTask} method="post" id="move-form">
+            <div className="text-right">
+              <span className="inline dark:text-slate-400">
+                Move selected to{" "}
+              </span>
+              <select
+                value={targetCard}
+                onChange={handleTargetCardChange}
+                className="pl-2 py-1 mr-2 inline text-slate-500 dark:text-slate-400 text-xs"
+              >
+                <option value="" defaultValue="">
+                  Choose
+                </option>
+                {status !== "todo" && <option value="todo">Todo</option>}
+                {status !== "progress" && (
+                  <option value="progress">In Progress</option>
+                )}
+                {status !== "done" && <option value="done">Done</option>}
+              </select>
+              <button
+                type="submit"
+                className="inline bg-slate-500 hover:bg-slate-400 text-slate-100 py-1 px-2"
+              >
+                Move
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
       <div className="py-2 px-2">
         <button
           className="block w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 tracking-wider"
           type="button"
           onClick={showAddList}
-          data-modal-toggle="default-modal"
         >
-          {isToggleAdd ? "Hide Add Task Form" : "Add Task"}
+          {isToggleAdd ? "Hide Form" : "Add Task"}
         </button>
         {isToggleAdd === true && (
           <form
