@@ -32,16 +32,15 @@ export default function App() {
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-0">
         <div className="mr-0 lg:mr-4 mb-4">
           <Card
-            color="stone-500"
             title="Todo List"
             tasks={taskList}
             status="todo"
             listCallback={setTaskList}
           />
         </div>
+
         <div className="mr-0 lg:mr-4 mb-4">
           <Card
-            color="cyan-500"
             title="In Progress"
             tasks={taskList}
             status="progress"
@@ -51,7 +50,6 @@ export default function App() {
 
         <div className="mr-0 mb-4">
           <Card
-            color="green-500"
             title="Done"
             tasks={taskList}
             status="done"

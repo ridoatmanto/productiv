@@ -3,19 +3,41 @@ import { useState } from "react";
 import { SortByDate } from "../utils/sort-by-date";
 import { RandomId } from "../utils/random-id";
 
+const todoBackground = "bg-stone-500";
+const todoBorder = "border-stone-500";
+
+const progressBackground = "bg-cyan-500";
+const progressBorder = "border-cyan-500";
+
+const doneBackground = "bg-green-500";
+const doneBorder = "border-green-500";
+
 export function Card({
-  color,
+  // color,
   title,
   tasks,
   status,
   listCallback,
 }: {
-  color: string;
+  // color: string;
   title: string;
   tasks: any;
   status: any;
   listCallback: any;
 }) {
+  let background = todoBackground;
+  let border = todoBorder;
+
+  if (status === "progress") {
+    background = progressBackground;
+    border = progressBorder;
+  }
+
+  if (status === "done") {
+    background = doneBackground;
+    border = doneBorder;
+  }
+
   const filteredList = tasks.filter((task: any) => {
     return task.status === status;
   });
@@ -100,13 +122,14 @@ export function Card({
   return (
     <div
       className={
-        "w-full rounded-lg lg:mb-0 border-2 bg-slate-50 dark:bg-slate-700 border-" +
-        color
+        "w-full rounded-lg lg:mb-0 border-2 bg-slate-50 dark:bg-slate-700 " +
+        border
       }
     >
       <h2
         className={
-          "py-1 mb-2 text-white text-lg text-center tracking-wider bg-" + color
+          "py-1 mb-2 text-white text-lg text-center tracking-wider " +
+          background
         }
       >
         {title}
@@ -150,7 +173,7 @@ export function Card({
       {movedList.length > 0 && (
         <div
           className={
-            "text-xs pb-2 pr-2 mt-2 border-b-2 border-dotted border-" + color
+            "text-xs pb-2 pr-2 mt-2 border-b-2 border-dotted " + border
           }
         >
           <form onSubmit={moveTask} method="post" id="move-form">
