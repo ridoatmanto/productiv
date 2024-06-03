@@ -9,12 +9,19 @@ Inspired by Trello.
 
 App Demo Website please visit [https://productiv.ridoatmanto.com/](https://productiv.ridoatmanto.com/).
 
+## Main Feature
+
+- List your task by status easily
+- Log your every activity
+- (Sure) Dark mode.
+
 ## Stack Build
 
 - Vite
 - React
 - TypeScript
 - Tailwind CSS
+- Flowbite
 - Bun
 - Vercel
 - CloudFlare.
