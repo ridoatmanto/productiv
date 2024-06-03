@@ -1,5 +1,5 @@
-import { Card } from "../components/card.tsx";
 import { tasks } from "../data/tasks.tsx";
+import { Card } from "../components/card.tsx";
 
 import { useState } from "react";
 
@@ -28,34 +28,32 @@ export default function App() {
   const [taskList, setTaskList] = useState(taskFromStorage);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-0">
-        <div className="mr-0 lg:mr-4 mb-4">
-          <Card
-            title="Todo List"
-            tasks={taskList}
-            status="todo"
-            listCallback={setTaskList}
-          />
-        </div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 lg:mx-0 min-h-72">
+      <div className="mr-0 lg:mr-4 mb-4">
+        <Card
+          title="Todo List"
+          tasks={taskList}
+          status="todo"
+          listCallback={setTaskList}
+        />
+      </div>
 
-        <div className="mr-0 lg:mr-4 mb-4">
-          <Card
-            title="In Progress"
-            tasks={taskList}
-            status="progress"
-            listCallback={setTaskList}
-          />
-        </div>
+      <div className="mr-0 lg:mr-4 mb-4">
+        <Card
+          title="In Progress"
+          tasks={taskList}
+          status="progress"
+          listCallback={setTaskList}
+        />
+      </div>
 
-        <div className="mr-0 mb-4">
-          <Card
-            title="Done"
-            tasks={taskList}
-            status="done"
-            listCallback={setTaskList}
-          />
-        </div>
+      <div className="mr-0 mb-4">
+        <Card
+          title="Done"
+          tasks={taskList}
+          status="done"
+          listCallback={setTaskList}
+        />
       </div>
     </div>
   );
