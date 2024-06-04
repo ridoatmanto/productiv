@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SortByDate } from "../utils/sort-by-date";
 import { RandomId } from "../utils/random-id";
 import { ExpandButton } from "./ui/expand-button";
+import { AddTaskForm } from "./ui/add-task-form";
 
 const todoBackground = "bg-stone-500";
 const todoBorder = "border-stone-500";
@@ -60,7 +61,7 @@ export function Card({
 
     const newTaskList = {
       id: RandomId(),
-      task: submittedTask,
+      task: submittedTask[0].toUpperCase() + submittedTask.slice(1),
       status: status,
       created_at: new Date(),
     };
@@ -208,27 +209,11 @@ export function Card({
       <div className="py-2 px-2">
         <ExpandButton toggleState={isToggleAdd} clickAction={showAddList} />
         {isToggleAdd === true && (
-          <form
-            onSubmit={handleSubmit}
-            method="post"
-            id="add-list-form"
-            className="mt-2"
-          >
-            <input
-              type="text"
-              name="new-list"
-              value={task}
-              onChange={handleChange}
-              className="w-9/12 bg-slate-100 text-slate-500 dark:bg-slate-500 dark:text-slate-300 border-2 border-solid border-slate-300 dark:border-slate-500 text-sm py-1 pl-2 rounded-lg"
-              placeholder="New list..."
-            />{" "}
-            <button
-              type="submit"
-              className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-lg px-2 py-2 text-white text-xs"
-            >
-              Add
-            </button>
-          </form>
+          <AddTaskForm
+            currentValue={task}
+            changeInputHandle={handleChange}
+            submitAction={handleSubmit}
+          />
         )}
       </div>
     </div>

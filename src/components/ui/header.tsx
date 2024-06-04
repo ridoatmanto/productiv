@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-// import "flowbite";
 
 export function Header() {
   const location = useLocation();
