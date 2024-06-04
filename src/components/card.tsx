@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { SortByDate } from "../utils/sort-by-date";
 import { RandomId } from "../utils/random-id";
+import { ExpandButton } from "./ui/expand-button";
 
 const todoBackground = "bg-stone-500";
 const todoBorder = "border-stone-500";
@@ -13,13 +14,11 @@ const doneBackground = "bg-green-500";
 const doneBorder = "border-green-500";
 
 export function Card({
-  // color,
   title,
   tasks,
   status,
   listCallback,
 }: {
-  // color: string;
   title: string;
   tasks: any;
   status: any;
@@ -207,13 +206,7 @@ export function Card({
       )}
 
       <div className="py-2 px-2">
-        <button
-          className="block w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-2 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 tracking-wider"
-          type="button"
-          onClick={showAddList}
-        >
-          {isToggleAdd ? "Hide Form" : "Add Task"}
-        </button>
+        <ExpandButton toggleState={isToggleAdd} clickAction={showAddList} />
         {isToggleAdd === true && (
           <form
             onSubmit={handleSubmit}
@@ -226,14 +219,14 @@ export function Card({
               name="new-list"
               value={task}
               onChange={handleChange}
-              className="w-10/12 bg-slate-100 text-slate-500 dark:bg-slate-500 dark:text-slate-300 border-2 border-solid border-slate-300 dark:border-slate-500 text-sm py-1 pl-2 rounded-lg"
+              className="w-9/12 bg-slate-100 text-slate-500 dark:bg-slate-500 dark:text-slate-300 border-2 border-solid border-slate-300 dark:border-slate-500 text-sm py-1 pl-2 rounded-lg"
               placeholder="New list..."
             />{" "}
             <button
               type="submit"
-              className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-full px-2 pt-0 pb-1 text-white"
+              className="border-1 border-slate-500 bg-slate-500 hover:bg-slate-400 rounded-lg px-2 py-2 text-white text-xs"
             >
-              +
+              Add
             </button>
           </form>
         )}
