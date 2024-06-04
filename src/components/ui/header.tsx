@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-import "flowbite";
+// import "flowbite";
 
 export function Header() {
   const location = useLocation();
@@ -50,9 +50,9 @@ export function Header() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
