@@ -25,12 +25,9 @@ export const removeTask = (taskId: string) => {
   return remainingTasks;
 };
 
-export const updateTaskStatus = (
-  taskCandidateIds: string[],
-  targetCard: string
-) => {
+export const updateTaskStatus = (taskIds: string[], targetCard: string) => {
   const newList = getTasks().map((task: any) => {
-    if (taskCandidateIds.includes(task.id)) {
+    if (taskIds.includes(task.id)) {
       task.status = targetCard;
       task.created_at = new Date();
     }
