@@ -5,7 +5,7 @@ Your best productivity tool companion.
 
 Inspired by Trello.
 
-![Preview Productiv App](screenshot.png)
+![Preview Productiv App](./public/screenshot.png)
 
 App Demo Website please visit [https://productiv.ridoatmanto.com/](https://productiv.ridoatmanto.com/).
 
@@ -15,7 +15,7 @@ App Demo Website please visit [https://productiv.ridoatmanto.com/](https://produ
 - Log your every activity
 - (Sure) Dark mode.
 
-## Stack Build
+## Tech Stack
 
 - Vite
 - React
