@@ -1,47 +1,51 @@
-import { RandomId } from "../utils/random-id";
-const currentDate = new Date();
+export type Task = {
+  id: string;
+  task: string;
+  status: string;
+  created_at: Date;
+};
 
-export const tasks = [
+export const dataTasks: Task[] = [
   {
-    id: RandomId(),
+    id: "abcde",
     task: "Check File on Github",
     status: "todo",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "efghi",
     task: "Write Daily Task",
     status: "todo",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "jklmn",
     task: "Set last 5 priority",
     status: "todo",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "opqrs",
     task: "Do first priority",
     status: "progress",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "tuvwx",
     task: "Confirm last task",
     status: "progress",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "yzabc",
     task: "Set done finished project",
     status: "done",
-    created_at: currentDate,
+    created_at: new Date(),
   },
   {
-    id: RandomId(),
+    id: "defgh",
     task: "Confirm existing resource available",
     status: "done",
-    created_at: currentDate,
+    created_at: new Date(),
   },
 ];

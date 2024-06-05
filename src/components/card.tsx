@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { updateTaskStatus, removeTask, saveTasks } from "../storage/tasks.tsx";
 import { SortByDate } from "../utils/sort-by-date";
 import { RandomId } from "../utils/random-id";
 import { ExpandButton } from "./ui/expand-button";
@@ -18,12 +19,12 @@ export function Card({
   title,
   tasks,
   status,
-  listCallback,
+  stateCallback,
 }: {
   title: string;
   tasks: any;
   status: any;
-  listCallback: any;
+  stateCallback: any;
 }) {
   let background = todoBackground;
   let border = todoBorder;
@@ -58,6 +59,14 @@ export function Card({
     event.preventDefault();
 
     const submittedTask = task;
+    if (
+      submittedTask === null ||
+      submittedTask === "" ||
+      submittedTask === undefined
+    ) {
+      console.error("WARNING: Empty task not allowed!");
+      return;
+    }
 
     const newTaskList = {
       id: RandomId(),
@@ -65,20 +74,13 @@ export function Card({
       status: status,
       created_at: new Date(),
     };
-    listCallback([...tasks, newTaskList]);
-    saveTasks([...tasks, newTaskList]);
+    stateCallback([...tasks, newTaskList]);
     setTask("");
   };
 
-  const removeTask = (id: any) => {
-    const updatedTasks = tasks.filter((task: any) => task.id !== id);
-    listCallback(updatedTasks);
-    saveTasks(updatedTasks);
-  };
+  const [movedList, setMovedList] = useState<string[]>([]);
 
-  const [movedList, setMovedList] = useState<number[]>([]);
-
-  const addIntoMovedList = (id: number) => {
+  const addIntoMovedList = (id: string) => {
     if (movedList.length == 0) {
       setMovedList([id]);
       return;
@@ -94,29 +96,20 @@ export function Card({
 
   const moveTask = (event: any) => {
     event.preventDefault();
-    const newList = tasks.map((task: any) => {
-      if (movedList.includes(task.id)) {
-        task.status = targetCard;
-        task.created_at = new Date();
-      }
-      return task;
-    });
-    listCallback(newList);
-    saveTasks(newList);
+    stateCallback(updateTaskStatus(movedList, targetCard));
     setTargetCard("");
     setMovedList([]);
+  };
+
+  const deleteTask = (id: string) => {
+    stateCallback(removeTask(id));
+    saveTasks(removeTask(id));
   };
 
   const [targetCard, setTargetCard] = useState("");
 
   const handleTargetCardChange = (event: any) => {
     setTargetCard(event.target.value);
-  };
-
-  const storageKey = "tasks";
-
-  const saveTasks = (tasks: any) => {
-    localStorage.setItem(storageKey, JSON.stringify(tasks));
   };
 
   return (
@@ -158,7 +151,7 @@ export function Card({
                 height="24"
                 fill="currentColor"
                 viewBox="0 0 24 24"
-                onClick={() => removeTask(task.id)}
+                onClick={() => deleteTask(task.id)}
               >
                 <path
                   fillRule="evenodd"
